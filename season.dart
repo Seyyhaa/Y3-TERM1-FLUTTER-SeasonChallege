@@ -27,18 +27,20 @@ void main() {
           backgroundColor: Colors.white,
         ),
 
-        body: Padding(padding: EdgeInsets.only(bottom:100  ),
-        
-       child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.center ,
-          
-          children: [
-            SeasonCard(countryName: "FRENCH", startSeason: Season.winter),
-            SizedBox(width: 180,),
-            SeasonCard(countryName: "CAMBODIA", startSeason: Season.winter),
-          ],
-        ),),
+        body: Padding(
+          padding: EdgeInsets.only(bottom: 100),
+
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.center,
+
+            children: [
+              SeasonCard(countryName: "FRENCH", startSeason: Season.winter),
+              SizedBox(width: 180),
+              SeasonCard(countryName: "CAMBODIA", startSeason: Season.winter),
+            ],
+          ),
+        ),
       ),
     ),
   );
@@ -59,10 +61,13 @@ class SeasonCard extends StatefulWidget {
 }
 
 class _SeasonCardState extends State<SeasonCard> {
+  late Season currentSeason;
 
-
-  Season currentSeason = Season.winter;
- 
+  @override
+  void initState() {
+    super.initState(); 
+    currentSeason = widget.startSeason;
+  }
 
   void changeSeason() {
     setState(() {
@@ -74,8 +79,7 @@ class _SeasonCardState extends State<SeasonCard> {
   @override
   Widget build(BuildContext context) {
     return Container(
-     
-      margin: EdgeInsetsDirectional.only(top:180),
+      margin: EdgeInsetsDirectional.only(top: 180),
       width: 250,
       height: 700,
 
