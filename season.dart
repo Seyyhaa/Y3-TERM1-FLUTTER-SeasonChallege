@@ -18,19 +18,28 @@ void main() {
   runApp(
     MaterialApp(
       home: Scaffold(
-        appBar: AppBar(title: Text("Season"), backgroundColor: Colors.white),
-      body: Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          SeasonCard(countryName: "French",startSeason: Season.winter,),
-          SizedBox(width: 100,),
-          SeasonCard(countryName: "Cambodia",startSeason: Season.winter,),
-        ],
+        appBar: AppBar(
+          centerTitle: true,
+          title: Text(
+            "Season",
+            style: TextStyle(fontSize: 64, fontWeight: FontWeight.bold),
+          ),
+          backgroundColor: Colors.white,
+        ),
+
+        body: Padding(padding: EdgeInsets.only(bottom:100  ),
         
+       child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.center ,
+          
+          children: [
+            SeasonCard(countryName: "FRENCH", startSeason: Season.winter),
+            SizedBox(width: 180,),
+            SeasonCard(countryName: "CAMBODIA", startSeason: Season.winter),
+          ],
+        ),),
       ),
-      ),
-  
-     
     ),
   );
 }
@@ -50,10 +59,10 @@ class SeasonCard extends StatefulWidget {
 }
 
 class _SeasonCardState extends State<SeasonCard> {
-  // Season currentSeason = Season.winter;
+
 
   Season currentSeason = Season.winter;
-  // String countryName;
+ 
 
   void changeSeason() {
     setState(() {
@@ -65,19 +74,44 @@ class _SeasonCardState extends State<SeasonCard> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(borderRadius: BorderRadius.circular(20)),
+     
+      margin: EdgeInsetsDirectional.only(top:180),
+      width: 250,
+      height: 700,
+
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(20),
+        border: Border.all(color: Colors.grey, width: 3),
+      ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
 
         children: [
-          GestureDetector(
-            onTap: changeSeason,
-            child: Image.asset(seasonImage[currentSeason.index], width: 200),
+          Expanded(
+            child: GestureDetector(
+              onTap: changeSeason,
+              child: Container(
+                width: double.infinity,
+                child: Image.asset(
+                  seasonImage[currentSeason.index],
+                  fit: BoxFit.cover,
+                ),
+              ),
+            ),
           ),
-        
-         Text(
-          widget.countryName, style: TextStyle(color: Colors.black,fontSize: 32),
-        ),
+          Divider(color: Colors.grey, thickness: 3, height: 0),
+          Padding(
+            padding: EdgeInsets.all(20),
+            child: Text(
+              widget.countryName,
+              style: TextStyle(
+                color: Colors.black,
+                fontSize: 32,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
         ],
       ),
     );
